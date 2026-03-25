@@ -15,7 +15,7 @@ const loginUser=async(email, password)=>{
         throw new Error('Inavlid email or password');
     }
     const isMatch=await user.comparePassword(password);
-    if(!isMatch){
+    if(!isMatch){   
         throw new Error('Invalid email or password');
     }
     return user;
@@ -30,4 +30,47 @@ const getUserById= async(id)=>{
     return user;
 }
 
-module.exports={registerUser, loginUser, getUserById};
+
+// Get all users — admin only
+const getAllUsers = async () => {
+  const users = await User.find();
+  return users;
+};
+
+// Update user
+const updateUser = async (id, updateData) => {
+  const user = await User.findByIdAndUpdate(
+    id,
+    updateData,
+    { new: true, runValidators: true }
+  );
+  if (!user) {
+    throw new Error('User not found');
+  }
+  return user;
+};
+
+// Delete user
+const deleteUser = async (id) => {
+  const user = await User.findByIdAndDelete(id);
+  if (!user) {
+    throw new Error('User not found');
+  }
+  return user;
+};
+
+// Get all customers
+const getAllCustomers = async () => {
+  const customers = await User.find({ role: 'customer' });
+  return customers;
+};
+
+module.exports = {
+  registerUser,
+  loginUser,
+  getUserById,
+  getAllUsers,
+  updateUser,
+  deleteUser,
+  getAllCustomers,
+};
