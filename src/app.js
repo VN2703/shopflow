@@ -7,6 +7,7 @@ const userRoutes = require('./routes/user.routes');
 const productRoutes = require('./routes/product.routes'); 
 const cartRoutes= require('./routes/cart.routes');
 const orderRoutes=require('./routes/order.routes');
+const dashboardRoutes = require('./routes/dashboard.routes');
 
 
 const app = express();
@@ -21,7 +22,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/users',userRoutes);
 app.use('/api/products', productRoutes); 
 app.use('/api/cart',cartRoutes);
-app.use('/api/order',orderRoutes);
+app.use('/api/orders',orderRoutes);
+app.use('/api/dashboard',dashboardRoutes);
+
 // Health check route
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', message: 'Server is running' });

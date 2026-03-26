@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.get('/view', protect, getMyCart);
 router.post('/add', protect, addItemToCart);
-router.delete('/remove/:productId', protect, removeItemFromCart);
-router.delete('/remove-all/:productId', protect, removeWholeProduct);
+router.put('/reduce/:productId', protect, removeItemFromCart);
+router.delete('/remove/:productId', protect, removeWholeProduct);
 router.delete('/clear', protect, clearMyCart);
 module.exports = router;
