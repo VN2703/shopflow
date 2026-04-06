@@ -18,7 +18,7 @@ const router = express.Router();
 router.post('/place', protect, createOrder);
 router.get('/my-orders',protect, getMyOrderList);
 //admin
-router.get('/all', protect, isAdmin, getAllOrdersList);
+router.get('/all', protect, isAdminOrManager, getAllOrdersList);
 //admin or manager
 router.put('/update/:id', protect, isAdminOrManager, updateStatus);
 router.get('/:id', protect, isAdminOrManager, getOrder);
