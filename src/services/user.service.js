@@ -1,11 +1,15 @@
 const User=require('../models/user.model');
+const { sendWelcomeEmail } = require('./email.service');
 
 const registerUser = async(userData) =>{
     const existingUser = await User.findOne({email: userData.email});
     if(existingUser){
         throw new Error('Email already exists')
     }
-    const user=await User.create(userData);
+     const plainPassword = userData.password; // ← save BEFORE create!
+  const user = await User.create(userData);
+
+      await sendWelcomeEmail(user.name, user.email, userData.password, user.role);
     return user;
 };
 
