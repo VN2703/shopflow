@@ -15,11 +15,7 @@ const app = express();
 // Middlewares
 app.use(helmet());
 app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "https://shopflow-vr099kg72-vn2703s-projects.vercel.app"
-  ],
-  credentials: true,
+  origin: "*",
 }));
 app.use(morgan('dev'));
 app.use(express.json());
